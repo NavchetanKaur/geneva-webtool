@@ -1,0 +1,44 @@
+# Temporary and binary files
+*~
+*.py[cod]
+*.so
+*.cfg
+
+__pycache__/*
+.cache/*
+.*.swp
+*/.ipynb_checkpoints/*
+
+# Project files
+.ropeproject
+.project
+.pydevproject
+.settings
+.idea
+
+# Package files
+*.egg
+*.eggs/
+.installed.cfg
+*.egg-info
+
+df_embed.csv
+df_gene.csv
+df_meta.csv
+df_N.csv
+df_var.csv
+df_var_mean.csv
+exp.csv
+fig1.png
+fig2.png
+gene_expression_figures.py
+gse_meta.csv
+out.png
+plot_df.csv
+Python_GENEVA.ipynb
+scat.csv
+temp-plot.html
+your_file.txt
+
+
+Webservices scripts
