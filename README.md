@@ -30,4 +30,4 @@ Steps to installing web app locally:
 ```
 
 
-[GRAGERT LAB](https://hla.tulane.edu)
+[Butte LAB](https://buttelab.ucsf.edu/)
