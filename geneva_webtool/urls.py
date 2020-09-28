@@ -18,8 +18,12 @@ from django.urls import path
 from geneva_app import views
 
 urlpatterns = [
-	path('', views.geneva_home, name='home'),
+	path('', views.geneva_home, name='geneva_home'),
+    path('single_gene', views.single_gene, name='single_gene'),
+    path('gene_set', views.gene_set, name='gene_set'),
 	path('gene_table', views.gene_table, name='gene_table'),
+    path('gene_set_table', views.gene_set_table, name='gene_set_table'),
     path('gse_description', views.gse_elab, name='gse_description'),
+    path('gsig_gse_description', views.gene_sig_gse_elab, name='gene_sig_gse_elab'),
     path('admin/', admin.site.urls),
 ]

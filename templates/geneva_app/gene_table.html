@@ -16,12 +16,42 @@
 
 
 <body>
+
+  <nav class="navbar sticky-top navbar-expand-sm justify-content-center nav-tabs" style="background-color: #284B63;">
+    <div class= "nav">
+        <li class="navbar-brand active">
+                <a class="nav-link text-white pl-5 pr-5 h5" href="{%url 'geneva_home' %}"> GENEVA </a>
+
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link text-white pl-5 pr-5 h5" href="{%url 'single_gene' %}"> Gene Query </a>
+
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link text-white pl-5 pr-5 h5" href="{%url 'gene_set' %}"> Gene Signature Query </a>
+              </li>
+
+              <li class="nav-item active">
+                <a class="nav-link text-white h5  pl-5 pr-5" href="https://amp.pharm.mssm.edu/archs4/"> ARCHS4 </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link text-white h5  pl-5 pr-5" href="https://www.ncbi.nlm.nih.gov/geo/"> GEO </a>
+              </li>
+
+              <li class="nav-item active">
+                <a class="nav-link text-white pl-5 pr-5 h5" href="https://buttelab.ucsf.edu/"> Butte Lab </a>
+              </li>
+         </div>
+  
+
+</nav>
+
     
-<div class="jumbotron jumbotron-fluid pt-4 pb-4 mt-2" style="background-color: #284B63;">
-    <h2 class="text-light text-center font-weight-bold mt-5">  Gene Expression Variation Table </h2> 
+<div class="container jumbotron-fluid pt-4 pb-4 mt-2" style="background-color: #d4dbdf;">
+    <h2 class="text-dark text-center font-weight-bold mt-5">  Gene Expression Variation Table </h2> 
 
     <form action="{% url 'gse_description' %}" method="get">
-      <h3 class="container text-white font-weight-bold text-center mt-5 mb-5">  User Input: 
+      <h3 class="container text-dark font-weight-bold text-center mt-5 mb-5">  Gene Name: 
         <input type = "hidden" name="gene_name" value={{gene_entry}}> {{gene_entry}} </input> </h3>  </div>
       
 

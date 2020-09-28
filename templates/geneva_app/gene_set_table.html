@@ -12,8 +12,12 @@
   </head>
 
 
+
+
+
 <body>
- <nav class="navbar sticky-top navbar-expand-sm justify-content-center nav-tabs" style="background-color: #284B63;">
+
+  <nav class="navbar sticky-top navbar-expand-sm justify-content-center nav-tabs" style="background-color: #284B63;">
     <div class= "nav">
         <li class="navbar-brand active">
                 <a class="nav-link text-white pl-5 pr-5 h5" href="{%url 'geneva_home' %}"> GENEVA </a>
@@ -30,7 +34,6 @@
               <li class="nav-item active">
                 <a class="nav-link text-white h5  pl-5 pr-5" href="https://amp.pharm.mssm.edu/archs4/"> ARCHS4 </a>
               </li>
-
               <li class="nav-item active">
                 <a class="nav-link text-white h5  pl-5 pr-5" href="https://www.ncbi.nlm.nih.gov/geo/"> GEO </a>
               </li>
@@ -41,64 +44,43 @@
          </div>
   
 
-</nav>   
-<div class="jumbotron-fluid pt-4 pb-4 mt-2" style="background-color: #d4dbdf;">
-    <h2 class="text-dark text-center font-weight-bold">  GSE Description </h2>  </div>
-        
-      <div class="container jumbotron text-dark font-weight-bold text-center mt-5 mb-5">  
-        <h3 class="text-danger"> Accession: {{gse_id}} </h3>
-        <h4> Title: {{title}} </h4>
-        <h3> <a class = "text-danger" href={{link}}> GEO Link </a> </h3> 
-        <br>
-  <div> {{summary}} </div> </div> 
-<div class="container"> 
-<div class="row"> 
-    <div class = "col"> 
-<div class=" card container">
-     {% autoescape off %}
-        {{plot1}}
-    {% endautoescape %} </div></div>
+</nav>
 
-<div class = "col"> 
-<div class=" card container">
-{% autoescape off %}
-    {{plot2}}
-  {% endautoescape %}  
     
-    </div> </div></div></div>
-
-
-
-  
+<div class="container jumbotron-fluid pt-4 pb-4 mt-2 text-dark text-center font-weight-bold mt-5" style="background-color: #d4dbdf;">
+    <h2>  Genes Expression Variation Table </h2> 
+ <form action="{% url 'gene_sig_gse_elab' %}" method="get">
+  <h3 class="mt-5 mb-5">  Genes Name </h3> 
+      <h4> Upregulated Genes: </h4>
+      <p>  <input type = "invisible" name="upregulated_genes" value="{{upgenes}}"> {{upgenes}} </input>  </p> 
+      <h4>  Downregulated Genes: </h4> 
+      <p> <input type = "invisible" name="downregulated_genes" value="{{downgenes}}"> {{downgenes}} </input> </p>  </div>
     
-
-    <div class="container mt-5 mb-5">
-<table class="container table table-responsive-sm table-bordered table-hover table-striped  text-xl-center"> 
+   <div class="container mt-5 mb-5">
+      <table class="container table table-responsive-sm table-bordered table-hover table-striped  text-xl-center"> 
             <thead class="thead-dark">
                 <tr> 
-                    <th scope="col"> GSM </th>
-                    <th scope="col"> Source </th>
-                    <th scope="col"> Title </th>
-                    <th scope="col"> Feature </th>
-                    <th scope="col"> {{gene_name}} </th>
+                    <th scope="col"> Dataset</th>
+                    <th scope="col"> Description </th>
+                    <th scope="col"> Geneva Score </th>
                 </tr>
             </thead>
             <tbody>
-            {% for a, b, c, d, e in zipped_list %}
-                <tr class="bg-light">
-                    <td>{{a}}</td> 
-                    <td>{{b}}</td>
-                    <td>{{c}}</td>
-                    <td>{{d}}</td>
-                    <td>{{e}}</td>
-                </tr>
-            {% endfor %}
+            {% for entry, condition, score in zipped_list %}
+        <tr class="bg-light">
+          
+          <td class="btn btn-outline-dark text-center"> <input type="submit" name="gse_id" value="{{entry}}"></td> 
+          <td>{{condition}}</td>
+          <td>{{score}}</td>
+        </tr>
+      {% endfor %}
             </tbody>
-        </table>    
-
+        </table>  </div>  
+</form> 
     </div>  
       
- <form 
+      
+ </div>
 
 <br>
 <br>
