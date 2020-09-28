@@ -92,7 +92,7 @@ def gse_elab(request):
 
 	#Scatter Plot
 	plot2 = plot([Scatter(x = plot_df['meta1'], y = plot_df['meta2'], text=plot_df['title'], hoverinfo='text', hovertext=plot_df[gene], mode = 'markers+text',  textposition='top center',
-		marker=dict(color=plot_df[gene], size=12, colorscale='Bluered', showscale=True), 
+		marker=dict(color=plot_df[gene], size=12, colorscale='Bluered', showscale=True),
 		textfont=dict(color='black', size=14, family='Times New Roman'))],output_type='div')
 			
 
