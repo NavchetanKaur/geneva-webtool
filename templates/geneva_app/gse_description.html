@@ -16,32 +16,34 @@
  <nav class="navbar sticky-top navbar-expand-sm justify-content-center nav-tabs" style="background-color: #284B63;">
     <div class= "nav">
         <li class="navbar-brand active">
-                <a class="nav-link text-white pl-5 pr-5 h5" href="{%url 'geneva_home' %}"> GENEVA </a>
+                <a class="nav-link text-white font-weight-bold pl-5 pr-5 h5" href="{%url 'geneva_home' %}"> GENEVA </a>
 
               </li>
               <li class="nav-item active">
-                <a class="nav-link text-white pl-5 pr-5 h5" href="{%url 'single_gene' %}"> Gene Query </a>
+                <a class="nav-link text-white font-weight-bold pl-5 pr-5 h5" href="{%url 'single_gene' %}"> Gene Query </a>
 
               </li>
               <li class="nav-item active">
-                <a class="nav-link text-white pl-5 pr-5 h5" href="{%url 'gene_set' %}"> Gene Signature Query </a>
+                <a class="nav-link text-white font-weight-bold pl-5 pr-5 h5" href="{%url 'gene_set' %}"> Gene Signature Query </a>
               </li>
 
               <li class="nav-item active">
-                <a class="nav-link text-white h5  pl-5 pr-5" href="https://amp.pharm.mssm.edu/archs4/"> ARCHS4 </a>
+                <a class="nav-link text-white font-weight-bold h5  pl-5 pr-5" href="{%url 'license' %}"> License </a>
               </li>
 
-              <li class="nav-item active">
-                <a class="nav-link text-white h5  pl-5 pr-5" href="https://www.ncbi.nlm.nih.gov/geo/"> GEO </a>
-              </li>
+              
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle font-weight-bold text-white h5  pl-5 pr-5" style="background-color: #284B63" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Related Links </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href="https://amp.pharm.mssm.edu/archs4/">  ARCHS4 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href="https://www.ncbi.nlm.nih.gov/geo/"> GEO </a> 
+                <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href="https://buttelab.ucsf.edu/"> Butte Lab </a></div> </li>
+                
 
-              <li class="nav-item active">
-                <a class="nav-link text-white pl-5 pr-5 h5" href="https://buttelab.ucsf.edu/"> Butte Lab </a>
-              </li>
-         </div>
-  
-
-</nav>   
+</nav>
 <div class="jumbotron-fluid pt-4 pb-4 mt-2" style="background-color: #d4dbdf;">
     <h2 class="text-dark text-center font-weight-bold">  GSE Description </h2>  </div>
         
@@ -51,25 +53,15 @@
         <h3> <a class = "text-danger" href={{link}}> GEO Link </a> </h3> 
         <br>
   <div> {{summary}} </div> </div> 
-<div class="container"> 
-<div class="row"> 
-    <div class = "col"> 
-<div class=" card container">
-     {% autoescape off %}
-        {{plot1}}
-    {% endautoescape %} </div></div>
 
-<div class = "col"> 
-<div class=" card container">
-{% autoescape off %}
-    {{plot2}}
-  {% endautoescape %}  
+
+
+  <div class="container" style="border-color: coral">
     
-    </div> </div></div></div>
-
-
-
-  
+    {% autoescape off %}
+    {{plot3}}
+  {% endautoescape %}
+  </div>
     
 
     <div class="container mt-5 mb-5">

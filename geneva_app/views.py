@@ -12,6 +12,7 @@ import re
 import urllib, base64
 from plotly.offline import plot
 import plotly.graph_objs as go
+from plotly.subplots import make_subplots
 from plotly.graph_objs import Bar
 from plotly.graph_objs import Scatter
 import plotly.express as px
@@ -23,6 +24,8 @@ import plotly.express as px
 def geneva_home(request):
 	return render(request, 'geneva_app/home.html')
 
+def license(request):
+    return render(request, 'geneva_app/license.html') 
 
 def single_gene(request):
 	return render(request, 'geneva_app/single_gene.html')	
@@ -87,18 +90,32 @@ def gse_elab(request):
 
 	
 	#BarPlot with plotly
-	plot_div = plot([Bar(y=plot_df_sm['title'], x=plot_df_sm[uinput_1], orientation='h')], output_type='div')
+	#plot_div = plot([Bar(y=plot_df_sm['title'], x=plot_df_sm[uinput_1], orientation='h')], output_type='div')
 	#plot_div = px.bar(plot_df_sm, x=plot_df_sm['title'], y=plot_df_sm[gene], hover_data=['GSM', 'source', 'title', 'feature'])
 
 	#Scatter Plot
-	plot2 = plot([Scatter(x = plot_df['meta1'], y = plot_df['meta2'], text=plot_df['title'], hoverinfo='text', hovertext=plot_df[gene], mode = 'markers+text',  textposition='top center',
-		marker=dict(color=plot_df[gene], size=12, colorscale='Bluered', showscale=True),
-		textfont=dict(color='black', size=14, family='Times New Roman'))],output_type='div')
+	#plot2 = plot([Scatter(x = plot_df['meta1'], y = plot_df['meta2'], text=plot_df['title'], hoverinfo='text', hovertext=plot_df[gene], mode = 'markers+text',  textposition='top center',
+		#marker=dict(color=plot_df[gene], size=12, colorscale='Bluered', showscale=True),
+		#textfont=dict(color='black', size=14, family='Times New Roman'))],output_type='div')
 			
-
+	fig = make_subplots(rows=1, cols=2)
+	
+	fig.add_bar(y=plot_df_sm['title'], x=plot_df_sm[uinput_1], orientation='h', row=1, col=1, showlegend=False)
+	fig.add_trace(go.Scatter(x = plot_df['meta1'], y = plot_df['meta2'], mode = 'markers+text', 
+                         textposition='top center', text=plot_df['title'], 
+                        textfont=dict(color='black',
+                        size=14, 
+                        family='Times New Roman'), 
+                        marker=dict(size = 20,
+                        color=plot_df[gene], 
+                        colorscale='Bluered',  
+                        showscale=True), showlegend=False), row=1, col=2)
+	fig.update_layout(margin=dict(pad=10))
+	
+	plt_div = plot(fig, output_type='div')
 
 	return render(request, 'geneva_app/gse_description.html', {
-		'gse_id': gse_id, 'title': title, 'summary': summary, 'link': link, 'gene_name': gene, 'plot1': plot_div, 'plot2': plot2,
+		'gse_id': gse_id, 'title': title, 'summary': summary, 'link': link, 'gene_name': gene, 'plot3': plt_div, 
 		'zipped_list': zip(df_col1, df_col2, df_col3, df_col4, df_col5)})
 
 def gene_sig_gse_elab(request):
@@ -129,15 +146,27 @@ def gene_sig_gse_elab(request):
 	df_col4 = plot_df_sm["characteristics"].to_list()
 	df_col5 = plot_df_sm["expression"].to_list()
 
-	plot_div = plot([Bar(y=plot_df_sm['title'], x=plot_df_sm['expression'], orientation='h')], output_type='div')
+	fig = make_subplots(rows=1, cols=2)
+	#plot_div = plot([Bar(y=plot_df_sm['title'], x=plot_df_sm['expression'], orientation='h')], output_type='div')
+	fig.add_bar(y=plot_df_sm['title'], x=plot_df_sm['expression'], orientation='h', row=1, col=1, showlegend=False)
+	
+	#plot2 = plot([Scatter(x = plot_df['meta1'], y = plot_df['meta2'], text=plot_df['title'], hoverinfo='text', hovertext=plot_df['expression'], mode = 'markers+text',  textposition='top center',
+		#marker=dict(color=plot_df['expression'], size=12, colorscale='Bluered', showscale=True), 
+		#textfont=dict(color='black', size=14, family='Times New Roman'))],output_type='div')
+	
+	fig.add_trace(go.Scatter(x = plot_df['meta1'], y = plot_df['meta2'], mode = 'markers+text', 
+                         textposition='top center', text=plot_df['title'], hoverinfo='text', hovertext=plot_df['expression'],
+                        textfont=dict(color='black',
+                        size=14, family='Times New Roman'), 
+                        marker=dict(size = 20, color=plot_df['expression'], 
+                        colorscale='Bluered',  
+                        showscale=True), showlegend=False), row=1, col=2)
+	fig.update_layout(margin=dict(pad=10))
 
-	plot2 = plot([Scatter(x = plot_df['meta1'], y = plot_df['meta2'], text=plot_df['title'], hoverinfo='text', hovertext=plot_df['expression'], mode = 'markers+text',  textposition='top center',
-		marker=dict(color=plot_df['expression'], size=12, colorscale='Bluered', showscale=True), 
-		textfont=dict(color='black', size=14, family='Times New Roman'))],output_type='div')
-			
 
+	plt_div = plot(fig, output_type='div')
 
 	return render(request, 'geneva_app/gsig_gse_description.html', {
-		'gse_id': gse_id, 'title': title, 'summary': summary, 'link': link, 'plot1': plot_div, 'plot2': plot2,
+		'gse_id': gse_id, 'title': title, 'summary': summary, 'link': link, 'plot': plt_div, 
 		'zipped_list': zip(df_col1, df_col2, df_col3, df_col4, df_col5)})
     

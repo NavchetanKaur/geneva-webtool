@@ -25,5 +25,6 @@ urlpatterns = [
     path('gene_set_table', views.gene_set_table, name='gene_set_table'),
     path('gse_description', views.gse_elab, name='gse_description'),
     path('gsig_gse_description', views.gene_sig_gse_elab, name='gene_sig_gse_elab'),
+    path('license', views.license, name='license'),
     path('admin/', admin.site.urls),
 ]

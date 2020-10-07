@@ -7,7 +7,7 @@ import numpy as np
 
 
 
-obj1 = ['df_embed','df_meta','df_var','df_var_mean','exp','gse_meta',"df_N"]
+obj1 = ['df_embed','df_meta','df_var_mean','exp','gse_meta',"df_N"] 
 data_dict = {}
 for o1 in obj1:
     fn = (o1+".csv")
@@ -16,6 +16,7 @@ for o1 in obj1:
 # dict of data frames
     
 data_dict["exp"] = data_dict["exp"].set_index("ID")
+data_dict["exp"] = data_dict["exp"].astype(np.uint8)
 
 
 total_GSE = 500
@@ -32,43 +33,42 @@ def f1(df1):
     return(df1)
 
 
-
-
-def gene_exp_table(gene):
-	df_gene = pd.DataFrame({})
-	df_gene["GSE"]=data_dict["df_var"]["GSE"]
-	df_gene["total_var"]=data_dict["df_var"][gene]
+def query_exp(query_expr):
+	query_expr = query_expr.merge(data_dict['df_meta'][["GSM","GSE"]],how="inner", on="GSM")
+	df_gene = query_expr.groupby('GSE', as_index=False)["gene"].var()
+	df_gene.rename(columns = {'gene':'total_var'}, inplace = True)
 	df_N_sub = data_dict["df_N"][(data_dict["df_N"]["GSE_N"]<=20) & (data_dict["df_N"]["GSE_N"]>=6)]
 	df_gene = df_gene.merge(df_N_sub,how="inner", on="GSE")
 	df_gene = df_gene.merge(data_dict["df_var_mean"],how="inner", on="GSE")
 	df_gene['GENEVA'] = df_gene["total_var"]/df_gene["var_mean"]
 	df_gene = df_gene.sort_values("GENEVA",ascending=False)
 	df_gene = df_gene.iloc[0:total_GSE,]
-
-
-	df_cor = pd.DataFrame({"GSM":data_dict["exp"].columns,"gene":data_dict["exp"].loc[gene,]})
-	df_cor= df_cor.merge(data_dict["df_embed"],how="inner", on="GSM")
+	
+	df_cor = query_expr
+	df_cor= df_cor.merge(data_dict["df_embed"],how="inner", on=["GSM","GSE"])
 	df_cor = df_cor[df_cor["GSE"].isin(df_gene["GSE"])].groupby("GSE")
-
 	dflist = [f1(group) for name, group in df_cor]
 	df_cor = pd.concat(dflist)
 
-
 	df_gene = df_gene.merge(df_cor,how="inner",on="GSE")
-
-
-
 	df_gene['GENEVA'] = df_gene['total_var']/df_gene['var_mean']*df_gene['r2']
 	df_gene = df_gene.merge(data_dict['gse_meta'], left_on="GSE", right_on="GSE_id")
-
-
-
 	l1 = np.where(~df_gene.columns.str.contains("ID|id|V1"))[0]
 	df_gene=df_gene.iloc[:,l1]
 	df_gene=df_gene.sort_values("GENEVA",ascending=False)
 
 	df1 = df_gene[['GSE','GSE_title','GENEVA']]
 
+
+	return query_expr, df_gene, df1
+
+
+def gene_exp_table(gene):
+	query_expr = pd.DataFrame({"GSM":data_dict["exp"].columns,"gene":data_dict["exp"].loc[gene,]})
+	output = query_exp(query_expr)
+	df_gene = output[1]
+	df1 = output[2]
+	
 	return df_gene, df1
 
 def multi_genes_set_table(up_gene, dn_gene):  
@@ -87,29 +87,12 @@ def multi_genes_set_table(up_gene, dn_gene):
 		query_expr = up_expr-dn_expr
 		query_expr = pd.DataFrame({"GSM":query_expr.index,"gene":query_expr })
 
-	query_expr = query_expr.merge(data_dict['df_meta'][["GSM","GSE"]],how="inner", on="GSM")
-	df_gene = query_expr.groupby('GSE', as_index=False)["gene"].var()
-	df_gene.rename(columns = {'gene':'total_var'}, inplace = True)
-	df_N_sub = data_dict["df_N"][(data_dict["df_N"]["GSE_N"]<=20) & (data_dict["df_N"]["GSE_N"]>=6)]
-	df_gene = df_gene.merge(df_N_sub,how="inner", on="GSE")
-	df_gene = df_gene.merge(data_dict["df_var_mean"],how="inner", on="GSE")
-	df_gene['GENEVA'] = df_gene["total_var"]/df_gene["var_mean"]
-	df_gene = df_gene.sort_values("GENEVA",ascending=False)
-	df_gene = df_gene.iloc[0:total_GSE,] 
-	df_cor = query_expr
-	df_cor= df_cor.merge(data_dict["df_embed"],how="inner", on=["GSM", "GSE"])
-	df_cor = df_cor[df_cor["GSE"].isin(df_gene["GSE"])].groupby("GSE")	
-	dflist = [f1(group) for name, group in df_cor]
-	df_cor = pd.concat(dflist)
-	df_gene = df_gene.merge(df_cor,how="inner",on="GSE")
-	df_gene['GENEVA'] = df_gene['total_var']/df_gene['var_mean']*df_gene['r2']
-	df_gene = df_gene.merge(data_dict['gse_meta'], left_on="GSE", right_on="GSE_id")
-	l1 = np.where(~df_gene.columns.str.contains("ID|id|V1"))[0]
-	df_gene=df_gene.iloc[:,l1]
-	df_gene=df_gene.sort_values("GENEVA",ascending=False)
-	df1 = df_gene[['GSE','GSE_title','GENEVA']]
+	output = query_exp(query_expr)
+	query_exprm = output[0]
+	df_gene = output[1]
+	df1 = output[2]
 	
-	return query_expr, df_gene, df1
+	return query_exprm, df_gene, df1
 
 	
 

@@ -16,30 +16,32 @@
 <nav class="navbar sticky-top navbar-expand-sm justify-content-center nav-tabs" style="background-color: #284B63;">
     <div class= "nav">
         <li class="navbar-brand active">
-                <a class="nav-link text-white pl-5 pr-5 h5" href="{%url 'geneva_home' %}"> GENEVA </a>
+                <a class="nav-link text-white font-weight-bold pl-5 pr-5 h5" href="{%url 'geneva_home' %}"> GENEVA </a>
 
               </li>
               <li class="nav-item active">
-                <a class="nav-link text-white pl-5 pr-5 h5" href="{%url 'single_gene' %}"> Gene Query </a>
+                <a class="nav-link text-white font-weight-bold pl-5 pr-5 h5" href="{%url 'single_gene' %}"> Gene Query </a>
 
               </li>
               <li class="nav-item active">
-                <a class="nav-link text-white pl-5 pr-5 h5" href="{%url 'gene_set' %}"> Gene Signature Query </a>
+                <a class="nav-link text-white font-weight-bold pl-5 pr-5 h5" href="{%url 'gene_set' %}"> Gene Signature Query </a>
               </li>
 
               <li class="nav-item active">
-                <a class="nav-link text-white h5  pl-5 pr-5" href="https://amp.pharm.mssm.edu/archs4/"> ARCHS4 </a>
+                <a class="nav-link text-white font-weight-bold h5  pl-5 pr-5" href="{%url 'license' %}"> License </a>
               </li>
 
-              <li class="nav-item active">
-                <a class="nav-link text-white h5  pl-5 pr-5" href="https://www.ncbi.nlm.nih.gov/geo/"> GEO </a>
-              </li>
-
-              <li class="nav-item active">
-                <a class="nav-link text-white pl-5 pr-5 h5" href="https://buttelab.ucsf.edu/"> Butte Lab </a>
-              </li>
-         </div>
-  
+              
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle font-weight-bold text-white h5  pl-5 pr-5" style="background-color: #284B63" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Related Links </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href="https://amp.pharm.mssm.edu/archs4/">  ARCHS4 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href="https://www.ncbi.nlm.nih.gov/geo/"> GEO </a> 
+                <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href="https://buttelab.ucsf.edu/"> Butte Lab </a></div> </li>
+                
 
 </nav>
 
@@ -75,12 +77,17 @@
 <br>
 <div class="container"> 
 <h3 class="text-center text-bold"> Enter Gene Names Below </h3>
+<br>
+<br>
 <form action="{% url 'gene_set_table' %}" method="get">
   <div class="form-group">
-    <label for="exampleFormControlTextarea1"> </label>
-    <textarea class="form-control text-center" id="upregulated_genes" name = "upregulated_genes" rows="1" placeholder="UPREGULATED GENES HERE"></textarea>
-    <textarea class="form-control text-center" id="downregulated_genes" name = "downregulated_genes" rows="1" placeholder="DOWNREGULATED GENES HERE"></textarea>
-  </div>
+    <div class="row">
+      <div class="col">
+    
+    <textarea class="form-control text-center" id="upregulated_genes" name = "upregulated_genes" rows="3" placeholder="UPREGULATED GENES HERE"></textarea> </div>
+    <div class="col">
+    <textarea class="form-control text-center" id="downregulated_genes" name = "downregulated_genes" rows="3" placeholder="DOWNREGULATED GENES HERE"></textarea> </div>
+  </div></div>
 
     <div class="d-flex justify-content-center"> 
     <input class="btn btn-danger btn-lg active mt-3" type="submit" value="SUBMIT"/></div>
