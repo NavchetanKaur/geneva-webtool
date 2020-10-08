@@ -113,6 +113,7 @@ def gse_elab(request):
 	fig.update_layout(margin=dict(pad=10))
 	
 	plt_div = plot(fig, output_type='div')
+	print(type(plt_div))
 
 	return render(request, 'geneva_app/gse_description.html', {
 		'gse_id': gse_id, 'title': title, 'summary': summary, 'link': link, 'gene_name': gene, 'plot3': plt_div, 

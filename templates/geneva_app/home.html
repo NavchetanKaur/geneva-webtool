@@ -13,9 +13,51 @@
   </head>
 
 <body>
-  <div class="jumbotron jumbotron-fluid pt-4 pb-4 mt-5" style="background-color: #284B63;">
-    <h2 class="text-light text-center font-weight-bold">  GENEVA: Gene Expression Variation Analysis </h2> 
-      <h4 class="text-light text-center mt-3"> Meta-analysis of Gene Expression Variation </h4></div>
+
+  <nav class="navbar sticky-top navbar-expand-sm justify-content-center nav-tabs" style="background-color: #284B63;">
+    <div class= "nav">
+        <li class="navbar-brand active">
+                <a class="nav-link text-white font-weight-bold pl-5 pr-5 h5" href="{%url 'geneva_home' %}"> GENEVA </a>
+
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link text-white font-weight-bold pl-5 pr-5 h5" href="{%url 'single_gene' %}"> Gene Query </a>
+
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link text-white font-weight-bold pl-5 pr-5 h5" href="{%url 'gene_set' %}"> Gene Signature Query </a>
+              </li>
+
+               <li class="nav-item active">
+                <a class="nav-link text-white font-weight-bold h5  pl-5 pr-5" href="{%url 'license' %}"> License </a>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle font-weight-bold text-white h5  pl-5 pr-5" style="background-color: #284B63" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Web Services </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href="{%url 'gene_query' %}" >  Gene Query </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href= "{%url 'gene_set_query' %}" > Gene Signature Query </a> 
+                 </li>
+                
+
+              
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle font-weight-bold text-white h5  pl-5 pr-5" style="background-color: #284B63" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Related Links </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href="https://amp.pharm.mssm.edu/archs4/">  ARCHS4 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href="https://www.ncbi.nlm.nih.gov/geo/"> GEO </a> 
+                <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href="https://buttelab.ucsf.edu/"> Butte Lab </a></div> </li>
+                
+
+</nav>
+  <div class="container jumbotron jumbotron-fluid pt-4 pb-4 mt-5" style="background-color: #d4dbdf;">
+    <h2 class="text-dark text-center font-weight-bold">  GENEVA: Gene Expression Variation Analysis </h2> 
+      <h4 class="text-dark text-center mt-3"> Meta-analysis of Gene Expression Variation </h4></div>
         <br>
       <div class="container pb-4 mb-5" style="border:2px solid #255">
     <img class="mr-3 ml-5" id="figure 1" src="{% static "images/Figure1.jpg" %}", width="1000", height="450" alt="First slide"> </img> </div>

@@ -26,9 +26,19 @@
                 <a class="nav-link text-white font-weight-bold pl-5 pr-5 h5" href="{%url 'gene_set' %}"> Gene Signature Query </a>
               </li>
 
-              <li class="nav-item active">
+               <li class="nav-item active">
                 <a class="nav-link text-white font-weight-bold h5  pl-5 pr-5" href="{%url 'license' %}"> License </a>
               </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle font-weight-bold text-white h5  pl-5 pr-5" style="background-color: #284B63" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Web Services </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href="{%url 'gene_query' %}" >  Gene Query </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href= "{%url 'gene_set_query' %}" > Gene Signature Query </a> 
+                 </li>
+                
 
               
               <li class="nav-item dropdown">

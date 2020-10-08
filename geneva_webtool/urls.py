@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from geneva_app import views
+from geneva_app import views, views_g, views_gs
+
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Web services interface for GENEVA')
 
 urlpatterns = [
 	path('', views.geneva_home, name='geneva_home'),
@@ -27,4 +31,7 @@ urlpatterns = [
     path('gsig_gse_description', views.gene_sig_gse_elab, name='gene_sig_gse_elab'),
     path('license', views.license, name='license'),
     path('admin/', admin.site.urls),
+    path('gene_query/', views_g.GeneApiView.as_view(), name='gene_query'),
+    path('gene_set_query/', views_gs.GeneSetApiView.as_view(), name='gene_set_query'),
+    path('services', schema_view, name="geneva_services"),
 ]

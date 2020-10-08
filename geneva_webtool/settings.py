@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'geneva_app',
+    'rest_framework',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +127,34 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+
+
+SWAGGER_SETTINGS = {
+    'JSON_EDITOR': True,
+    'USE_SESSION_AUTH': False,
+    'SECURITY_DEFINITIONS': {
+        'oauth2': {
+            'type': 'apiKey',
+            'description': 'Personal API Key authorization',
+            'name': 'Authorization',
+            'in': 'header',
+    }
+    },
+    'APIS_SORTER': 'alpha',
+    # "JSON_EDITOR": True,
+    "SHOW_REQUEST_HEADERS": True,
+    "VALIDATOR_URL": False,
+    "api_key": 'veristoken fbe16f3a4c292c774c54', # An API key
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': [
+                               'rest_framework.parsers.FormParser',
+                               'rest_framework.parsers.MultiPartParser',
+                               'rest_framework.parsers.JSONParser',
+                               ],
+
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+}
+
+
