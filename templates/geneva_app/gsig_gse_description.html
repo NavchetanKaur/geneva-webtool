@@ -31,6 +31,10 @@
                 <a class="nav-link text-white font-weight-bold h5  pl-5 pr-5" href="{%url 'license' %}"> License </a>
               </li>
 
+               <li class="nav-item active">
+                <a class="nav-link text-white font-weight-bold h5  pl-5 pr-5" href="{%url 'license' %}"> Help </a>
+              </li>
+
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle font-weight-bold text-white h5  pl-5 pr-5" style="background-color: #284B63" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                    Web Services </a>
@@ -59,9 +63,9 @@
     <h2 class="text-dark text-center font-weight-bold">  GSE Description </h2>  </div>
         
       <div class="container jumbotron text-dark font-weight-bold text-center mt-5 mb-5">  
-        <h3 class="text-danger"> Accession: {{gse_id}} </h3>
+        <h3 class="text-danger"> Accession:  <a class = "text-danger" href={{link}}> {{gse_id}} </a> </h3>
         <h4> Title: {{title}} </h4>
-        <h3> <a class = "text-danger" href={{link}}> GEO Link </a> </h3> 
+        
         <br>
   <div> {{summary}} </div> </div> 
 
@@ -76,6 +80,7 @@
     
 
     <div class="container mt-5 mb-5">
+      <h4 class="text-center"> Detailed Sample Information </h4>
 <table class="container table table-responsive-sm table-bordered table-hover table-striped  text-xl-center"> 
             <thead class="thead-dark">
                 <tr> 

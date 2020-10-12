@@ -32,6 +32,10 @@
                 <a class="nav-link text-white font-weight-bold h5  pl-5 pr-5" href="{%url 'license' %}"> License </a>
               </li>
 
+              <li class="nav-item active">
+                <a class="nav-link text-white font-weight-bold h5  pl-5 pr-5" href="{%url 'license' %}"> Help </a>
+              </li>
+
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle font-weight-bold text-white h5  pl-5 pr-5" style="background-color: #284B63" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                    Web Services </a>
@@ -41,7 +45,6 @@
                 <a class="dropdown-item text-white font-weight-bold" style="background-color: #284B63"; href= "{%url 'gene_set_query' %}" > Gene Signature Query </a> 
                  </li>
                 
-
               
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle font-weight-bold text-white h5  pl-5 pr-5" style="background-color: #284B63" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -55,21 +58,21 @@
                 
 
 </nav>
-  <div class="container jumbotron jumbotron-fluid pt-4 pb-4 mt-5" style="background-color: #d4dbdf;">
-    <h2 class="text-dark text-center font-weight-bold">  GENEVA: Gene Expression Variation Analysis </h2> 
-      <h4 class="text-dark text-center mt-3"> Meta-analysis of Gene Expression Variation </h4></div>
-        <br>
-      <div class="container pb-4 mb-5" style="border:2px solid #255">
-    <img class="mr-3 ml-5" id="figure 1" src="{% static "images/Figure1.jpg" %}", width="1000", height="450" alt="First slide"> </img> </div>
-<div class = "container">   
-<hr>
+  
 <br>
-</div> 
-
+<br>
+<div class="media container mt-5">
+  <img src="{% static "images/GENEVA.png" %}", width="300", height="150" class="align-self-center mr-3">
+  <div class="media-body">
+    <h2 class="mt-0 mb-3">GENEVA: Gene Expression Variation Analysis</h2>
+    <p>GENEVA allows you to identify RNA-sequencing datasets from the Gene Expression Omnibus (GEO) that contains conditions modulating a gene or a gene signature. See the Help page fore more detail.</p>
+  </div>
+</div>
 
 <br>
+<br>
 
-<div class="container"> 
+<div class="container mt-5"> 
 <h3 class="text-center text-bold">Choose One of the Following</h3>
 <br>
 
@@ -77,8 +80,7 @@
  <div class="row">  
   <div class="card" style="width: 33.5rem;">
     <div class="card-body ml-2">
-      <h1 class="card-title"> Gene Query </h1>
-        <p class="card-text"> Queries a Single Gene </p>
+      <h3 class="card-title"> Gene Query </h3>
         <br>
         <a href="{% url 'single_gene' %}" class="btn btn-lg btn-success active"> CLICK HERE !</a>
       </div>
@@ -86,8 +88,7 @@
 
   <div class="card" style="width: 33.5rem;">
     <div class="card-body ml-2">
-      <h1 class="card-title"> Gene Signature Query </h1>
-        <p class="card-text"> Queries a Set of Upregulated and Downregulated Genes </p>
+      <h3 class="card-title"> Gene Signature Query </h3>
         <br>
           <a href="{% url 'gene_set' %}" class="btn btn-lg btn-primary active"> CLICK HERE !</a>
           </div>

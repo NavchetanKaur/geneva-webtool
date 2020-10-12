@@ -35,6 +35,10 @@
                 <a class="nav-link text-white font-weight-bold h5  pl-5 pr-5" href="{%url 'license' %}"> License </a>
               </li>
 
+              <li class="nav-item active">
+                <a class="nav-link text-white font-weight-bold h5  pl-5 pr-5" href="{%url 'license' %}"> Help </a>
+              </li>
+
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle font-weight-bold text-white h5  pl-5 pr-5" style="background-color: #284B63" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                    Web Services </a>
@@ -60,13 +64,11 @@
 </nav>
     
 <div class="container jumbotron-fluid pt-4 pb-4 mt-2 text-dark text-center font-weight-bold mt-5" style="background-color: #d4dbdf;">
-    <h2>  Genes Expression Variation Table </h2> 
  <form action="{% url 'gene_sig_gse_elab' %}" method="get">
-  <h3 class="mt-5 mb-5">  Genes Name </h3> 
-      <h4> Upregulated Genes: </h4>
-      <p>  <input type = "invisible" name="upregulated_genes" value="{{upgenes}}"> </input>  </p> 
-      <h4>  Downregulated Genes: </h4> 
-      <p> <input type = "invisible" name="downregulated_genes" value="{{downgenes}}"></input> </p>  </div>
+  <h3 class="mt-2 mb-3">  Signature Query </h3> 
+      <h5> Upregulated Genes: <input type = "hidden" name="upregulated_genes" value="{{upgenes}}">{{upgenes}} </input> </h5>
+      <h5>  Downregulated Genes: <input type = "hidden" name="downregulated_genes" value="{{downgenes}}"> {{downgenes}} </input> </p></h5>  </div>
+   
     
    <div class="container mt-5 mb-5">
       <table class="container table table-responsive-sm table-bordered table-hover table-striped  text-xl-center"> 

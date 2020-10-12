@@ -35,6 +35,10 @@
                 <a class="nav-link text-white font-weight-bold h5  pl-5 pr-5" href="{%url 'license' %}"> License </a>
               </li>
 
+              <li class="nav-item active">
+                <a class="nav-link text-white font-weight-bold h5  pl-5 pr-5" href="{%url 'license' %}"> Help </a>
+              </li>
+
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle font-weight-bold text-white h5  pl-5 pr-5" style="background-color: #284B63" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                    Web Services </a>
@@ -59,12 +63,11 @@
 
 </nav>
 
+<br>
     
-<div class="container jumbotron-fluid pt-4 pb-4 mt-2" style="background-color: #d4dbdf;">
-    <h2 class="text-dark text-center font-weight-bold mt-5">  Gene Expression Variation Table </h2> 
-
+<div class="container jumbotron-fluid pt-4 pb-4 mt-5" style="background-color: #d4dbdf;">
     <form action="{% url 'gse_description' %}" method="get">
-      <h3 class="container text-dark font-weight-bold text-center mt-5 mb-5">  Gene Name: 
+      <h3 class="container text-dark font-weight-bold text-center mt-2 mb-2">  Gene Query: 
         <input type = "hidden" name="gene_name" value={{gene_entry}}> {{gene_entry}} </input> </h3>  </div>
       
 
