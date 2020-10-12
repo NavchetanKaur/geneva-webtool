@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 {% load static %}
 
@@ -12,8 +11,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
   </head>
-<body>
-  <nav class="navbar sticky-top navbar-expand-sm justify-content-center nav-tabs" style="background-color: #284B63;">
+<body> 
+<nav class="navbar sticky-top navbar-expand-sm justify-content-center nav-tabs" style="background-color: #284B63;">
     <div class= "nav">
         <li class="navbar-brand active">
                 <a class="nav-link text-white font-weight-bold pl-5 pr-5 h5" href="{%url 'geneva_home' %}"> GENEVA </a>
@@ -59,57 +58,53 @@
 
 </nav>
 
-<body>
-  <div class="container jumbotron-fluid pt-4 pb-4 mt-5" style="background-color: #d4dbdf;">
-    <h2 class="text-dark text-center font-weight-bold">  GENEVA: Gene Expression Variation Analysis </h2> </div>
-        <br>
 
- <br>
-  <br>
-   <br>
-
-
-<div class="container"> 
+   
+   
+    <h3 class="container text-danger active font-weight-bold text-center mb-5 mt-5"> Introduction to GENEVA </h3>
     
-      <a class="col-sm btn w-100 btn-outline-dark btn-md font-weight-bold" href="{% static "images/genelist.txt" %}" > Complete List of Genes (N = 35,240) </a> 
-    
-</div>
-
-
-
-</div>
-</div>
-
+    <div class="container"> 
+    <p>GENEVA (GENe Expression Variance Analysis) is a semi-automated framework for exploring public RNA-seq datasets. GENEVA (Gene Expression Variance Analysis) allows researchers to identify RNA-seq datasets that contain modulating conditions for a gene or a gene signature. For a given gene, GENEVA identifies the most relevant datasets by analyzing the variance of the gene expression. GENEVA visualizes the relevant datasets for detailed manual analysis. GENEVA is scalable and is agnostic to study designs. </p>
 <br>
 <br>
-<br>
-<br>
-<div class="container"> 
-<h3 class="text-center text-bold"> Enter Gene Name Below </h3>
-<form action="{% url 'gene_table' %}">
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1"> </label>
-    <textarea class="form-control text-center" id="exampleFormControlTextarea1" name = "gene_name" rows="1" placeholder="GENE NAME"></textarea>
-  </div>
+    <h4 class="text-center">The data source of GENEVA </h4>
 
-    <div class="d-flex justify-content-center"> 
-    <input class="btn btn-danger btn-lg active mt-3" type="submit" value="SUBMIT"/></div>
-</form>
-</div>
+<p> GENEVA uses the uniformly processed RNA-seq data from the ARCHS4 website (https://amp.pharm.mssm.edu/archs4/download.html). As of Oct 9, 2020, The downloaded data include gene-level count data of 286650 samples from 9124 datasets (GEO series) and metadata.  GENEVA transformed the gene count data into percentile rank data, which reduces the influences of library size, batch effects, and extreme values. </p>
 
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
+<img class="text-center" id="figure 1" src="{% static "images/Picture1.png" %}", width="500", height="150" alt="First slide"> </img> 
+
+<br>
+<br>
+<h4 class="text-center"> How GENEVA Score is calculated </h4>
+
+<p> For any given gene (gene X), GENEVA prioritizes the datasets that have a large variance of the gene X expression. At the same time, GENEVA controls for the overall heterogeneity of the samples to prioritize datasets in which gene X is specifically modulated by experimental conditions rather than due to tissue type differences. In addition, GENEVA embeds the meta-data into numerical space and prioritizes datasets with high correlations between ACE2 expression and the metadata. This allows GENEVA to identify datasets in which gene X is regulated by experimental conditions rather than randomness or unexplained factors. </p>
+
+<p> GENEVA concatenates the metadata of each sample into a single string, including the title, tissue type, and other characteristics (e.g. demographics, time points, treatment, genetic information, and disease status). GENEVA then calculates the pairwise Levenshtein distance between the strings that belong to the same study (GEO series). GENEVA applies multidimensional scaling to the pairwise Levenshtein distance and embedded the strings into 2-dimensional space for visualization and downstream analysis. </p>
+
+<p> For a given gene in a given dataset, GENEVA calculates the variance of the gene (VARg). GENEVA measures the overall heterogeneity of the samples by calculating the average variance of all genes (VARm). GENEVA runs a regression using the expression of the gene as the dependent variable and the embedded metadata as independent variables (expression ~ first embed dimension + second embed dimension). The regression coefficient (R2) represents the association between the expression of the gene and the embedded metadata. The product between VARg and R2 represents the variance of the gene explained by the embedded metadata. The GENEVA score is defined as VARg × R2  / VARm.
+
+</p>
+
+<br>
+<br>
+<h4 class="text-center"> How to interpret the visualization</h4>
+
+<img class="text-center" src="{% static "images/plots.jpg" %}", width="800", height="300" alt="First slide"> </img> 
+<h5>Barplot </h5> 
+<p> If the user queries a single gene, the bar plot shows the expression level (rank transformed count data) of the gene. If the user queries a signature, the bar plot shows the enrichment score of the signature </p>
+<h5>  2-D plot </h5> 
+<p>  GENEVA embeds the metadata of the samples into 2-dimensional numerical space. Samples with similar experimental conditions will be close to each other in the 2-D plot.  The 2-D plot allows users to visually identify experimental groups, and correlate the experimental group with the expression value. The color of each sample reflects the expression level of the gene (rank transformed count data) or the enrichment of the signature.</p> </div>
+
+
+
+
+
+
+<br>
+<br>
 
 <div class="jumbotron text-white mt-5 pt-2 pb-2" style="background-color: #284B63;"> 
 <h3 class="container text-center" > Contact Us </h3>

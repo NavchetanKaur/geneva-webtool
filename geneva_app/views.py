@@ -27,6 +27,9 @@ def geneva_home(request):
 def license(request):
     return render(request, 'geneva_app/license.html') 
 
+def help(request):
+    return render(request, 'geneva_app/help.html') 
+
 def single_gene(request):
 	return render(request, 'geneva_app/single_gene.html')	
 
@@ -98,22 +101,27 @@ def gse_elab(request):
 		#marker=dict(color=plot_df[gene], size=12, colorscale='Bluered', showscale=True),
 		#textfont=dict(color='black', size=14, family='Times New Roman'))],output_type='div')
 			
-	fig = make_subplots(rows=1, cols=2)
+	fig = make_subplots(rows=1, cols=2, subplot_titles=("Expression Level", "Meta Data Embedding"))
 	
 	fig.add_bar(y=plot_df_sm['title'], x=plot_df_sm[uinput_1], orientation='h', row=1, col=1, showlegend=False)
 	fig.add_trace(go.Scatter(x = plot_df['meta1'], y = plot_df['meta2'], mode = 'markers+text', 
-                         textposition='top center', text=plot_df['title'], 
+                         textposition='top center', text=plot_df['title'], hoverinfo='text', hovertext=plot_df[gene],
                         textfont=dict(color='black',
                         size=14, 
                         family='Times New Roman'), 
                         marker=dict(size = 20,
                         color=plot_df[gene], 
-                        colorscale='Bluered',  
+                        colorscale='Bluered', 
+                        colorbar=dict(title="Expression Level"), 
                         showscale=True), showlegend=False), row=1, col=2)
-	fig.update_layout(margin=dict(pad=10))
+
+	fig['layout']['xaxis']['title']='Expression Level'
+	fig['layout']['xaxis2']['title']='Dimension 1'
+	fig['layout']['yaxis']['title']='Samples'
+	fig['layout']['yaxis2']['title']='Dimension 2'
 	
 	plt_div = plot(fig, output_type='div')
-	print(type(plt_div))
+	#print(type(plt_div))
 
 	return render(request, 'geneva_app/gse_description.html', {
 		'gse_id': gse_id, 'title': title, 'summary': summary, 'link': link, 'gene_name': gene, 'plot3': plt_div, 
@@ -147,7 +155,7 @@ def gene_sig_gse_elab(request):
 	df_col4 = plot_df_sm["characteristics"].to_list()
 	df_col5 = plot_df_sm["expression"].to_list()
 
-	fig = make_subplots(rows=1, cols=2)
+	fig = make_subplots(rows=1, cols=2, subplot_titles=("Expression Level", "Meta Data Embedding"))
 	#plot_div = plot([Bar(y=plot_df_sm['title'], x=plot_df_sm['expression'], orientation='h')], output_type='div')
 	fig.add_bar(y=plot_df_sm['title'], x=plot_df_sm['expression'], orientation='h', row=1, col=1, showlegend=False)
 	
@@ -160,9 +168,14 @@ def gene_sig_gse_elab(request):
                         textfont=dict(color='black',
                         size=14, family='Times New Roman'), 
                         marker=dict(size = 20, color=plot_df['expression'], 
-                        colorscale='Bluered',  
+                        colorscale='Bluered', 
+                        colorbar=dict(title="Expression Level"), 
                         showscale=True), showlegend=False), row=1, col=2)
-	fig.update_layout(margin=dict(pad=10))
+
+	fig['layout']['xaxis']['title']='Expression Level'
+	fig['layout']['xaxis2']['title']='Dimension 1'
+	fig['layout']['yaxis']['title']='Samples'
+	fig['layout']['yaxis2']['title']='Dimension 2'
 
 
 	plt_div = plot(fig, output_type='div')

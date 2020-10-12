@@ -30,6 +30,7 @@ urlpatterns = [
     path('gse_description', views.gse_elab, name='gse_description'),
     path('gsig_gse_description', views.gene_sig_gse_elab, name='gene_sig_gse_elab'),
     path('license', views.license, name='license'),
+    path('help', views.help, name='help'),
     path('admin/', admin.site.urls),
     path('gene_query/', views_g.GeneApiView.as_view(), name='gene_query'),
     path('gene_set_query/', views_gs.GeneSetApiView.as_view(), name='gene_set_query'),
